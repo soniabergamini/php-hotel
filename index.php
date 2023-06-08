@@ -8,6 +8,8 @@
     <title>Hotel</title>
     <!-- Favicon -->
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
@@ -50,22 +52,23 @@
             'distance_to_center' => 50
         ],
     ];
-    var_dump($hotels)
+    // var_dump($hotels)
     ?>
 
     <!-- HEADER -->
     <header>
-        <h1>HOTELS ARRAY</h1>
+        <h1 class="text-3xl font-bold text-center text-green-600">HOTELS ARRAY</h1>
     </header>
 
     <!-- MAIN -->
     <main>
-        <div>
+        <!-- Hotels printed in an unordered list -->
+        <div class="box-content	m-auto px-5">
             <?php foreach ($hotels as $building) { ?>
-                <h4>Building: </h4>
-                <ul> 
+                <h4 class="box-content m-auto pt-4"><mark>Building:</mark></h4>
+                <ul class="box-content m-auto list-disc list-inside">
                     <?php foreach ($building as $key => $value) { ?>
-                        <li>
+                        <li class="box-content m-auto p-1">
                             <strong><?php echo $key ?>: </strong>
                             <span><?php echo $value ?></span>
                         </li>
@@ -74,6 +77,29 @@
                 </ul>
             <?php } ?>
         </div>
+
+        <!-- Hotels printed in Tailwind Table -->
+        <div class="flex justify-center mt-10">
+            <table class="table-fixed">
+                <thead class="bg-green-600 text-white">
+                    <tr>
+                        <?php foreach ($hotels[0] as $key => $value) { ?>
+                            <th class="py-2 border px-5"> <?php echo strtoupper($key) ?></th>
+                        <?php } ?>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($hotels as $building) { ?>
+                        <tr>
+                            <?php foreach ($building as $data) { ?>
+                                <td class="border px-5 py-2"> <?php echo $data ?> </td>
+                            <?php } ?>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
+
     </main>
 
 </body>
