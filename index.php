@@ -17,6 +17,7 @@
     <?php
     $parking = $_GET["formParking"];
     $vote = $_GET["formVote"];
+    $hotelsView = [];
     $hotels = [
         [
             'name' => 'Hotel Belvedere',
@@ -54,7 +55,22 @@
             'distance_to_center' => 50
         ],
     ];
-    // var_dump($hotels)
+
+    // Populates a filtered array based on user choices
+    if ($parking == "onlyPark") {
+        foreach ($hotels as $building) {
+            if ($building["parking"]=="1" && $building["vote"] >= $vote) {
+                $hotelsView[] = $building;
+            }
+        };
+    } else {
+        foreach ($hotels as $building) {
+            if ($building["vote"] >= $vote) {
+                $hotelsView[] = $building;
+            }
+        }
+    }
+    
     ?>
 
     <!-- HEADER -->
@@ -65,22 +81,22 @@
     <!-- MAIN -->
     <main>
         <!-- Hotels printed in an unordered list -->
-        <div class="box-content	m-auto px-5">
-            <?php foreach ($hotels as $building) { ?>
+        <!-- <div class="box-content	m-auto px-5">
+            <?php // foreach ($hotels as $building) { ?>
                 <h4 class="box-content m-auto pt-4"><mark>Building:</mark></h4>
                 <ul class="box-content m-auto list-disc list-inside">
-                    <?php foreach ($building as $key => $value) { ?>
+                    <?php // foreach ($building as $key => $value) { ?>
                         <li class="box-content m-auto p-1">
-                            <strong><?php echo $key ?>: </strong>
-                            <span><?php echo $value ?></span>
+                            <strong><?php //echo $key ?>: </strong>
+                            <span><?php// echo $value ?></span>
                         </li>
                         <hr>
-                    <?php } ?>
+                    <?php// } ?>
                 </ul>
-            <?php } ?>
-        </div>
+            <?php//} ?>
+        </div> -->
 
-        <!-- Hotels printed in Tailwind Table -->
+        <!-- Hotels printed in Tailwind Table with Filters -->
         <div class="flex justify-center my-10">
             <table class="table-fixed">
 
@@ -95,7 +111,7 @@
 
                 <!-- Table data -->
                 <tbody>
-                    <?php foreach ($hotels as $building) { ?>
+                    <?php foreach ($hotelsView as $building) { ?>
                         <tr>
                             <?php foreach ($building as $key => $data) { ?>
                                 <td class="border px-7 py-2 text-center">

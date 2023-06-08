@@ -16,13 +16,13 @@
     <main class="flex justify-center items-center h-screen">
         <form action="index.php" method="get" class="border p-5 w-[50%]">
             <label for="formParking">1. Do you want to view only hotels with parking?</label>
-            <select class="bg-lime-100 px-2 py-1 my-2" name="formParking" id="formParking">
+            <select class="bg-lime-100 px-2 py-1 my-2" name="formParking" id="formParking" required>
                 <option value="onlyPark">YES</option>
                 <option value="indifPark">NO</option>
             </select>
             <hr>
             <label for="formVote">2. Do you want to choose the minimum vote of the hotel? Write a number between 1 and 5:</label>
-            <input type="number" name="formVote" id="formVote" min="1" max="5" class="bg-lime-100 text-center px-2 py-1 my-2" placeholder="1">
+            <input type="number" name="formVote" id="formVote" min="1" max="5" class="bg-lime-100 text-center px-2 py-1 my-2" placeholder="1" required>
             <hr>
             <button type="submit" class="block border border-green-600	bg-green-600 px-2 py-1 text-white my-3">SEND</button>
         </form>
