@@ -81,22 +81,38 @@
         <!-- Hotels printed in Tailwind Table -->
         <div class="flex justify-center mt-10">
             <table class="table-fixed">
+
+                <!-- Table indexes -->
                 <thead class="bg-green-600 text-white">
                     <tr>
                         <?php foreach ($hotels[0] as $key => $value) { ?>
-                            <th class="py-2 border px-5"> <?php echo strtoupper($key) ?></th>
+                            <th class="py-2 border px-5"> <?php echo strtoupper(str_replace("_", " ", $key)) ?></th>
                         <?php } ?>
                     </tr>
                 </thead>
+
+                <!-- Table data -->
                 <tbody>
                     <?php foreach ($hotels as $building) { ?>
                         <tr>
-                            <?php foreach ($building as $data) { ?>
-                                <td class="border px-5 py-2"> <?php echo $data ?> </td>
+                            <?php foreach ($building as $key => $data) { ?>
+                                <td class="border px-7 py-2 text-center">
+                                    <?php
+                                    // Manage the true/false of parking key
+                                    if ($key == "parking" && $data == "1") {
+                                        echo "Present";
+                                    } elseif ($key == "parking" && $data == "") {
+                                        echo "Absent";
+                                    } else {
+                                        echo $data;
+                                    }
+                                    ?>
+                                </td>
                             <?php } ?>
                         </tr>
                     <?php } ?>
                 </tbody>
+
             </table>
         </div>
 
