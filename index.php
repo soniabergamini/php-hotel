@@ -1,3 +1,65 @@
+<!-- DATA -->
+<?php
+$parking = $_GET["formParking"] ?? "";
+$vote = $_GET["formVote"] ?? "";
+$hotelsView = [];
+$hotels = [
+    [
+        'name' => 'Hotel Belvedere',
+        'description' => 'Hotel Belvedere Descrizione',
+        'parking' => true,
+        'vote' => 4,
+        'distance_to_center' => 10.4
+    ],
+    [
+        'name' => 'Hotel Futuro',
+        'description' => 'Hotel Futuro Descrizione',
+        'parking' => true,
+        'vote' => 2,
+        'distance_to_center' => 2
+    ],
+    [
+        'name' => 'Hotel Rivamare',
+        'description' => 'Hotel Rivamare Descrizione',
+        'parking' => false,
+        'vote' => 1,
+        'distance_to_center' => 1
+    ],
+    [
+        'name' => 'Hotel Bellavista',
+        'description' => 'Hotel Bellavista Descrizione',
+        'parking' => false,
+        'vote' => 5,
+        'distance_to_center' => 5.5
+    ],
+    [
+        'name' => 'Hotel Milano',
+        'description' => 'Hotel Milano Descrizione',
+        'parking' => true,
+        'vote' => 2,
+        'distance_to_center' => 50
+    ],
+];
+?>
+
+<!-- LOGIC -->
+<?php
+// Populates a filtered array based on user choices
+foreach ($hotels as $building) {
+    if ($parking == "onlyPark") {
+        if ($building["parking"] == "1" && $building["vote"] >= $vote) {
+            $hotelsView[] = $building;
+        }
+    } elseif ($vote != '') {
+        if ($building["vote"] >= $vote) {
+            $hotelsView[] = $building;
+        }
+    } else {
+        $hotelsView[] = $building;
+    }
+};
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,65 +102,7 @@
             </form>
         </section>
 
-        <!-- DATA -->
-        <?php
-        $parking = $_GET["formParking"] ?? "";
-        $vote = $_GET["formVote"] ?? "";
-        $hotelsView = [];
-        $hotels = [
-            [
-                'name' => 'Hotel Belvedere',
-                'description' => 'Hotel Belvedere Descrizione',
-                'parking' => true,
-                'vote' => 4,
-                'distance_to_center' => 10.4
-            ],
-            [
-                'name' => 'Hotel Futuro',
-                'description' => 'Hotel Futuro Descrizione',
-                'parking' => true,
-                'vote' => 2,
-                'distance_to_center' => 2
-            ],
-            [
-                'name' => 'Hotel Rivamare',
-                'description' => 'Hotel Rivamare Descrizione',
-                'parking' => false,
-                'vote' => 1,
-                'distance_to_center' => 1
-            ],
-            [
-                'name' => 'Hotel Bellavista',
-                'description' => 'Hotel Bellavista Descrizione',
-                'parking' => false,
-                'vote' => 5,
-                'distance_to_center' => 5.5
-            ],
-            [
-                'name' => 'Hotel Milano',
-                'description' => 'Hotel Milano Descrizione',
-                'parking' => true,
-                'vote' => 2,
-                'distance_to_center' => 50
-            ],
-        ];
-        ?>
 
-        <!-- LOGIC -->
-        <?php
-        // Populates a filtered array based on user choices
-        foreach ($hotels as $building) {
-            if ($parking == "onlyPark") {
-                if ($building["parking"] == "1" && $building["vote"] >= $vote) {
-                    $hotelsView[] = $building;
-                }
-            } elseif ($building["vote"] >= $vote) {
-                $hotelsView[] = $building;
-            } else {
-                $hotelsView[] = $building;
-            }
-        };
-        ?>
 
         <!-- Hotels printed in Tailwind Table with Filters -->
         <div class="flex justify-center my-10">
