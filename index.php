@@ -15,6 +15,8 @@
 <body>
     <!-- DATA -->
     <?php
+    $parking = $_GET["formParking"];
+    $vote = $_GET["formVote"];
     $hotels = [
         [
             'name' => 'Hotel Belvedere',
@@ -79,7 +81,7 @@
         </div>
 
         <!-- Hotels printed in Tailwind Table -->
-        <div class="flex justify-center mt-10">
+        <div class="flex justify-center my-10">
             <table class="table-fixed">
 
                 <!-- Table indexes -->
